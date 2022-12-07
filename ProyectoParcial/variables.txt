@@ -7,12 +7,12 @@ main:
 sw  $fp  0($sp)
 addiu  $sp  $sp-4
 
-li  $a0,  5
+li  $a0,  2
 
 sw  $a0  0($sp)
 addiu  $sp  $sp-4
 
-jal  suma
+jal  resta
 
 la  $t0,  var_x
 sw  $a0,  0($t0)
@@ -25,7 +25,7 @@ syscall
 
 move  $fp  $sp  
 
-suma:
+resta:
 
 sw  $ra,  0($sp)
 addiu  $sp,  $sp,  -4
@@ -35,38 +35,10 @@ lw  $a0,  8($sp)
 sw  $a0,  0($sp)
 addiu  $sp,  $sp,  -4
 
-li $a0,    x
+li $a0,    7
 
-sw  $fp  0($sp)
-addiu  $sp  $sp-4
-
-li  $a0,  5
-
-sw  $a0  0($sp)
-addiu  $sp  $sp-4
-
-jal  suma
-
-la  $t0,  var_x
-sw  $a0,  0($t0)
-
-li $v0, 1
-syscall
-
-li $v0, 10
-syscall
-
-move  $fp  $sp  
-
-suma:
-
-sw  $ra,  0($sp)
-addiu  $sp,  $sp,  -4
-
-lw  $a0,  8($sp)
-
-sw  $a0,  0($sp)
-addiu  $sp,  $sp,  -4
+lw   $t1,   4($sp) 
+sub  $a0,  $a0,  $t1 
 
 
 addiu  $sp,  $sp,  4

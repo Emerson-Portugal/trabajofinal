@@ -43,7 +43,7 @@ def inicializarVar(variable):
 
 def convertir(variable, signo, valor):
     file = open("ProyectoParcial/variables.txt", "a")
-    print(variable.lexeme, signo, valor)
+    #print(variable.lexeme, signo, valor)
     valor_res = valor[::-1]
     pack.append(valor_res)
     signo_res = signo[::-1]
@@ -83,6 +83,18 @@ def convertir(variable, signo, valor):
                         file.write("add  " + "$a0,  "   "$a0,  " + "$t1 \n")
                         file.write("\naddiu  " + "$sp  " + "$sp  " + "4")
                         index_signo += 1
+                    elif signo_res[index_signo] == "-":
+                        file.write("\nlw   " + "$t1,   " + "4($sp) \n")
+                        file.write("sub  " + "$a0,  "   "$a0,  " + "$t1 \n")
+                        file.write("\naddiu  " + "$sp  " + "$sp  " + "4")
+                        index_signo += 1
+                    elif signo_res[index_signo] == "*":
+                        file.write("\nlw   " + "$t1,   " + "4($sp) \n")
+                        file.write("mul  " + "$a0,  "   "$a0,  " + "$t1 \n")
+                        file.write("\naddiu  " + "$sp  " + "$sp  " + "4")
+                        index_signo += 1
+                    else:
+                        print("signo de encontrado")
 
         file.write("\n\nla   " + "$t0,  " + "var_"+variable.lexeme)
         file.write("\nsw  " + "$a0,  " + "0($t0)")
@@ -288,6 +300,24 @@ def createFuction(valor, signo, nombreFuncion):
                 # add $a0, $a0, $t1
                 file.write("\nlw   " + "$t1,   " + "4($sp) \n")
                 file.write("add  " + "$a0,  "   "$a0,  " + "$t1 \n")
+
+            elif signo[0] == "-":
+                # # suma
+                # lw $t1, 4($sp)
+                # add $a0, $a0, $t1
+                file.write("\nlw   " + "$t1,   " + "4($sp) \n")
+                file.write("sub  " + "$a0,  "   "$a0,  " + "$t1 \n")
+
+
+            elif signo[0] == "*":
+                # # suma
+                # lw $t1, 4($sp)
+                # add $a0, $a0, $t1
+                file.write("\nlw   " + "$t1,   " + "4($sp) \n")
+                file.write("mul  " + "$a0,  "   "$a0,  " + "$t1 \n")
+
+            else:
+                print("Signo no Encontrado")
 
         # # li $a0, 10
         # file.write("\nli $a0,    " + valor + "\n")

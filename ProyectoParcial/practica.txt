@@ -1,4 +1,4 @@
-def suma (int p){
-    return p;
+def resta (int p){
+    return p - 7;
 }
-int x = suma(5);
+int x = resta(2);

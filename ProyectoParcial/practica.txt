@@ -1,0 +1,4 @@
+def suma (int p){
+    return p;
+}
+int x = suma(5);
